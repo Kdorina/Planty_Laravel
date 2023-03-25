@@ -3,15 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
-{ use HasApiTokens, HasFactory, Notifiable;
+class Admin extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
 
+    
+    protected $table = 'admins';
+    protected $guarded = array();
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +25,7 @@ class Admin extends Model
         'email',
         'password',
     ];
+    // public $timestamps = false;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,5 +45,4 @@ class Admin extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
 }

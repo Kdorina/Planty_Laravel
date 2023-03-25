@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Admin extends JsonResource
@@ -10,15 +9,19 @@ class Admin extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @return array<string, mixed>
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray(Request $request): array
+    public function toArray($request)
     {
-        return [
-            "id"=>$this->id,
-            "name"=>$this->name,
-            "password"=>$this->password,
-            "confirm_password"=>$this->password
-        ];
+       // return parent::toArray($request);
+
+       return [
+        "id"=> $this->id,
+        "name"=> $this->name,
+        "email"=> $this->email,
+        
+     
+    ];
     }
 }

@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Admin as AdminResource;
 use App\Http\Controllers\BaseController as BaseController;
 
 class AdminController extends BaseController
