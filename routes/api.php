@@ -48,7 +48,6 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 Route::post('/adminReg', [AdminController::class, "adminRegister" ]); 
 Route::post('/adminLog', [AdminController::class, "adminLogin" ]); 
 
-Route::group(['middleware' => 'admin'], function () {
     Route::post("/logoutAdmin",[AdminController::class, "logout"]);
 
     Route::get('/plants', [PlantController::class, "index"]);
@@ -63,4 +62,4 @@ Route::group(['middleware' => 'admin'], function () {
     Route::put('/typeUpdate/{id}', [TypeController::class, "update"]);
     Route::delete('/typeDelete/{id}', [TypeController::class, "destory"]);
     
-});
+
