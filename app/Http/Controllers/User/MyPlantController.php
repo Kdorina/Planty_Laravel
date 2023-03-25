@@ -4,8 +4,48 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\MyPlant;
+use App\Models\User;
+use Validator;
+use DB;
+use App\Models\Plant;
+use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Resources\MyPlant as MyPlantResource;
 
-class MyPlantController extends Controller
+class MyPlantController extends BaseController
 {
-    //
+    public function index(Request $request){
+
+        if(Auth::check()){
+            $id = Auth::user()->id;
+            $myplant = DB::table('myplants')->where(['user_id'=> $id])->get();
+        }
+    }
+
+    public function create(Request $request){
+
+        if(Auth::check()){
+            $id = Auth::user()->getId();
+        }
+
+      
+        // $plantId = DB::table('plants')->select();
+        $input = $request->all();
+        $input['plant_id'] = Plant::where('id', $input['plant_id'])->first()->id;
+
+        $validation = Validator::make($input,[
+            'plant_id'=>'required'
+        ]);
+
+        if($validation->fails()){
+            return $this->sendError($validator, 'Hiba! Sikertelen felvétel');
+        }
+
+        $plant = MyPlant::create([
+            'user_id'=>$id,
+            'plant_id'=>$input['plant_id']
+        ]);
+        return $this->sendResponse( new MyPlantResource($plant), "Sikeres feltöltés");
+    }
 }
