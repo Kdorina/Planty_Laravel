@@ -19,7 +19,7 @@ class Disease extends JsonResource
         return [
             "name"=>$this->name,
             "imgpath"=>$this->imgpath,
-            "type_id"=>this->type_id,
+            "type_id"=>$this->type_id,
             "description"=>$this->description,
             "solution"=>$this->solution
         ];

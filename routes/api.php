@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\MyPlantController;
 use App\Http\Controllers\User\WaterController;
@@ -48,6 +49,9 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 Route::post('/adminReg', [AdminController::class, "adminRegister" ]); 
 Route::post('/adminLog', [AdminController::class, "adminLogin" ]); 
 
+
+Route::group(['middleware'=>['auth:sanctum']], function(){
+
     Route::post("/logoutAdmin",[AdminController::class, "logout"]);
 
     Route::get('/plants', [PlantController::class, "index"]);
@@ -61,5 +65,12 @@ Route::post('/adminLog', [AdminController::class, "adminLogin" ]);
     Route::get('/type/{id}', [TypeController::class, "show"]);
     Route::put('/typeUpdate/{id}', [TypeController::class, "update"]);
     Route::delete('/typeDelete/{id}', [TypeController::class, "destory"]);
-    
+
+});
+
+Route::get('/diseases', [DiseaseController::class, "index"]);
+    Route::post('/disease', [DiseaseController::class, "create"]);
+    Route::get('/disease/{id}', [DiseaseController::class, "show"]);
+    Route::put('/disease/{id}', [DiseaseController::class, "update"]);
+    Route::delete('/disease/{id}', [DiseaseController::class, "destory"]);
 

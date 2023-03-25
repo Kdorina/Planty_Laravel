@@ -12,6 +12,10 @@ class Disease extends Model
     protected $table = 'diseases';
 
     protected $fillable = [
-
+        "name",
+        "imgpath",
+        "type_id",
+        "description",
+        "solution"
     ];
 }

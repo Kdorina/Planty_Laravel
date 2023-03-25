@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NutrientSolution;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Resources\NutrientSolution as NutrientSolutionResources;
 use Validator;

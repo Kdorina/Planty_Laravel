@@ -11,7 +11,7 @@ class MyPlant extends Model
 {
     use HasFactory;
 
-    protected $table = 'my_plants';
+    protected $table = 'myplants';
 
     public function users(){
         return $this->belongsTo(User::class);
