@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('plants', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
+            $table->string("imgpath")->nullable();
+            $table->string("description");
+            $table->string("watering");
+            $table->string("temperature");
+            $table->string("light_requirement");
+            $table->string("humidity");
+            $table->integer("heat_demand");
             $table->timestamps();
         });
     }

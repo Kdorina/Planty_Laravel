@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('nutrients', function (Blueprint $table) {
             $table->id();
+            $table->boolean('addNutrient');
+            $table->foreignId("user_id");
             $table->timestamps();
         });
     }

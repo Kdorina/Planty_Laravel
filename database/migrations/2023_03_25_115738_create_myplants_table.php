@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('myplants', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('plant_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

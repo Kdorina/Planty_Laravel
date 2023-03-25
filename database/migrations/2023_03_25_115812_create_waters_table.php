@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('waters', function (Blueprint $table) {
             $table->id();
+            $table->boolean("addwater");
+            $table->foreignId("user_id");
             $table->timestamps();
         });
     }
