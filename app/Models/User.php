@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\MyPlant;
 
 class User extends Authenticatable
 {
@@ -14,6 +15,9 @@ class User extends Authenticatable
 
     public function getId(){
         return $this->id;
+    }
+    public function myplant(){
+        return $this->hasMany(MyPlant::class);
     }
     /**
      * The attributes that are mass assignable.

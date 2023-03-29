@@ -31,6 +31,7 @@ Route::post("/login",[AuthController::class, "login"]);
 Route::post("/register",[AuthController::class, "register"]);
 Route::post("/logout",[AuthController::class, "logout"]);
 
+
 Route::group(['middleware'=>['auth:sanctum']], function(){
 
     Route::get("/myplants",[MyPlantController::class, "index"]);
@@ -50,10 +51,11 @@ Route::post('/adminReg', [AdminController::class, "adminRegister" ]);
 Route::post('/adminLog', [AdminController::class, "adminLogin" ]); 
 
 
+
 Route::group(['middleware'=>['auth:sanctum']], function(){
 
     Route::post("/logoutAdmin",[AdminController::class, "logout"]);
-
+   
     Route::get('/plants', [PlantController::class, "index"]);
     Route::post('/plant', [PlantController::class, "create"]);
     Route::get('/plant/{id}', [PlantController::class, "show"]);

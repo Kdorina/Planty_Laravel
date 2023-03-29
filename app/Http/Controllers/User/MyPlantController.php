@@ -18,33 +18,33 @@ class MyPlantController extends BaseController
     public function index(Request $request){
 
         if(Auth::check()){
-            $id = Auth::user()->id;
-            $myplant = DB::table('myplants')->where(['user_id'=> $id])->get();
+            $user_id = Auth::user()->id;
+            $myplant = DB::table('myplants')->where(['user_id'=> $user_id])->get();
         }
     }
 
     public function create(Request $request){
-
-        if(Auth::check()){
+     
+        if (Auth::check())
+        {
             $id = Auth::user()->getId();
         }
 
-      
         // $plantId = DB::table('plants')->select();
         $input = $request->all();
-        $input['plant_id'] = Plant::where('id', $input['plant_id'])->first()->id;
+         $input['plant_id'] = Plant::where('id', $input['plant_id'])->first()->id;
 
         $validation = Validator::make($input,[
             'plant_id'=>'required'
         ]);
 
         if($validation->fails()){
-            return $this->sendError($validator, 'Hiba! Sikertelen felvétel');
+            return $this->sendError($validation, 'Hiba! Sikertelen felvétel');
         }
 
         $plant = MyPlant::create([
-            'user_id'=>$id,
-            'plant_id'=>$input['plant_id']
+            "user_id"=>$id,
+            "plant_id"=>$request->plant_id
         ]);
         return $this->sendResponse( new MyPlantResource($plant), "Sikeres feltöltés");
     }

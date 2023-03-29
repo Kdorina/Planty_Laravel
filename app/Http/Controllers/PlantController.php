@@ -48,7 +48,7 @@ class PlantController extends BaseController
 
         $input = Plant::create([
             "name"=>$request->name,
-            "imgpath"=>$path,
+            "imgpath"=>$name,
             "description"=>$request->description,
             "watering"=>$request->watering,
             "temperature"=>$request->temperature,
