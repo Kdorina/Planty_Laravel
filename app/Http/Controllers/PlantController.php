@@ -17,7 +17,7 @@ class PlantController extends BaseController
 
         $plants =  Plant::all();
         return $plants;
-        
+
     }
 
     public function create(Request $request){
@@ -26,7 +26,7 @@ class PlantController extends BaseController
 
         $validator = Validator::make($input, [
             "name"=>"required",
-            // "imgpath"=>"required",
+            "imgpath"=>"required",
             "description"=>"required",
             "watering"=>"required",
             "temperature"=>"required",

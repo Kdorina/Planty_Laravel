@@ -46,33 +46,34 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 });
 
 
-//ADMIN 
-Route::post('/adminReg', [AdminController::class, "adminRegister" ]); 
-Route::post('/adminLog', [AdminController::class, "adminLogin" ]); 
+//ADMIN
+Route::post('/adminReg', [AdminController::class, "adminRegister" ]);
+Route::post('/adminLog', [AdminController::class, "adminLogin" ]);
 
 
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
 
     Route::post("/logoutAdmin",[AdminController::class, "logout"]);
-   
+
     Route::get('/plants', [PlantController::class, "index"]);
     Route::post('/plant', [PlantController::class, "create"]);
     Route::get('/plant/{id}', [PlantController::class, "show"]);
     Route::put('/plantUpdate/{id}', [PlantController::class, "update"]);
     Route::delete('/plantDelete/{id}', [PlantController::class, "destroy"]);
-    
+
     Route::get('/types', [TypeController::class, "index"]);
     Route::post('/type', [TypeController::class, "create"]);
     Route::get('/type/{id}', [TypeController::class, "show"]);
     Route::put('/typeUpdate/{id}', [TypeController::class, "update"]);
     Route::delete('/typeDelete/{id}', [TypeController::class, "destory"]);
 
-});
-
-Route::get('/diseases', [DiseaseController::class, "index"]);
     Route::post('/disease', [DiseaseController::class, "create"]);
     Route::get('/disease/{id}', [DiseaseController::class, "show"]);
     Route::put('/disease/{id}', [DiseaseController::class, "update"]);
     Route::delete('/disease/{id}', [DiseaseController::class, "destory"]);
 
+
+});
+
+Route::get('/diseases', [DiseaseController::class, "index"]);
