@@ -45,4 +45,10 @@ class NutrientSolutionController extends BaseController
         ]);
         return $this->sendResponse( new NutrientSolutionResources($input), 'Sikeres felvétel');
     }
+    public function destroy($id){
+        $nutrient = NutrientSolution::find($id);
+        $nutrient->delete();
+        return $this->sendResponse(new NutrientSolutionResources($nutrient), "Sikeres törlés.");
+
+    }
 }

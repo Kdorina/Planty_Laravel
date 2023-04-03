@@ -44,4 +44,10 @@ class WaterController extends BaseController
         return $this->sendResponse( new WaterResources($input), 'Sikeres felvétel');
 
     }
+    public function destroy($id){
+        $water = Water::find($id);
+        $water->delete();
+        return $this->sendResponse(new WaterResources($water), "Sikeres törlés.");
+
+    }
 }

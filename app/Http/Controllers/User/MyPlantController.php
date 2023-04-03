@@ -24,7 +24,7 @@ class MyPlantController extends BaseController
     }
 
     public function create(Request $request){
-     
+
         if (Auth::check())
         {
             $id = Auth::user()->getId();
@@ -47,5 +47,12 @@ class MyPlantController extends BaseController
             "plant_id"=>$request->plant_id
         ]);
         return $this->sendResponse( new MyPlantResource($plant), "Sikeres feltöltés");
+    }
+
+    public function destroy($id){
+        $myplant = MyPlant::find($id);
+        $myplant->delete();
+        return $this->sendResponse(new MyPlantResource($myplant), "Sikeres törlés.");
+
     }
 }

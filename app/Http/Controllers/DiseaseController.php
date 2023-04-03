@@ -31,7 +31,7 @@ class DiseaseController extends BaseController
         if($validation->fails()){
             return $this->sendError($validation, 'sikertelen felvétel');
         }
-        
+
         if(!$request->hasFile('imgpath') && !$request->file('imgpath')->isValid()){
             return response()->json('{"error":" please add image"}');
         }
@@ -50,14 +50,16 @@ class DiseaseController extends BaseController
     }
 
     public function show(Request $request, $id){
-        
+
     }
 
     public function update(Request $request, $id){
-        
+
     }
 
     public function destroy(Request $request, $id){
-        
+        $disease = Disease::find($id);
+        $disease->delete();
+        return $this->sendResponse(new DiseaseResources($disease), "Sikeres törlés.");
     }
 }
