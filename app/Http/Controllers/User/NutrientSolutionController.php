@@ -52,7 +52,7 @@ class NutrientSolutionController extends BaseController
         if(is_null($show)){
             return $this->sendError( new NutrientSolutionResources($show), 'nem létezik ilyen');
         }
-        return $this->sendResponse(new NutrientSolutionResources($show), 'Sikeres lekérés')
+        return $this->sendResponse(new NutrientSolutionResources($show), 'Sikeres lekérés');
 
     }
 
@@ -64,7 +64,7 @@ class NutrientSolutionController extends BaseController
             "addNutrient"=>"required"
         ]);
         if($validation->fails()){
-            return $this->sendError($validator, 'Hiba! Sikertelen szerkeztés');
+            return $this->sendError($validation, 'Hiba! Sikertelen szerkeztés');
         }
 
         $input = NutrientSolution::find($id);

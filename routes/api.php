@@ -36,12 +36,19 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
     Route::get("/myplants",[MyPlantController::class, "index"]);
     Route::post("/myplant",[MyPlantController::class, "create"]);
+    Route::delete("/myplants/{id}",[MyPlantController::class, "destroy"]);
 
     Route::get("/water",[WaterController::class, "index"]);
     Route::post("/addwater",[WaterController::class, "create"]);
+    Route::get("/showWater/{id}",[WaterController::class, "show"]);
+    Route::put("/updateWater/{id}",[WaterController::class, "update"]);
+    Route::delete("/deleteWaters/{id}",[WaterController::class, "destroy"]);
 
     Route::get("/nutrients",[NutrientSolutionController::class, "index"]);
     Route::post("/addnutrients",[NutrientSolutionController::class, "create"]);
+    Route::get("/showNutrient/{id}",[NutrientSolutionController::class, "show"]);
+    Route::put("/updateNutrient/{id}",[NutrientSolutionController::class, "update"]);
+    Route::delete("/deleteNutrients/{id}",[NutrientSolutionController::class, "destroy"]);
 
 });
 

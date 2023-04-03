@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\MyPlant;
+use App\Models\Water;
+use App\Models\NutrientSolution;
 
 class User extends Authenticatable
 {
@@ -18,6 +20,12 @@ class User extends Authenticatable
     }
     public function myplant(){
         return $this->hasMany(MyPlant::class);
+    }
+    public function water(){
+        return $this->hasMany(Water::class);
+    }
+    public function nutrientSolution(){
+        return $this->hasMany(NutrientSolution::class);
     }
     /**
      * The attributes that are mass assignable.
