@@ -45,6 +45,35 @@ class NutrientSolutionController extends BaseController
         ]);
         return $this->sendResponse( new NutrientSolutionResources($input), 'Sikeres felvétel');
     }
+
+    public function show($id){
+
+        $show = NutrientSolution::find($id);
+        if(is_null($show)){
+            return $this->sendError( new NutrientSolutionResources($show), 'nem létezik ilyen');
+        }
+        return $this->sendResponse(new NutrientSolutionResources($show), 'Sikeres lekérés')
+
+    }
+
+    public function update(Request $request, $id){
+
+        $input = $request->all();
+
+        $validation = Validator::make($input, [
+            "addNutrient"=>"required"
+        ]);
+        if($validation->fails()){
+            return $this->sendError($validator, 'Hiba! Sikertelen szerkeztés');
+        }
+
+        $input = NutrientSolution::find($id);
+        $input->update([
+            "addNutrient"=>$request->addNutrient,
+        ]);
+        return $this->sendResponse( new NutrientSolutionResources($input), 'Sikeres szerkeztés');
+    }
+
     public function destroy($id){
         $nutrient = NutrientSolution::find($id);
         $nutrient->delete();

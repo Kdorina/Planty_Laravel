@@ -44,6 +44,34 @@ class WaterController extends BaseController
         return $this->sendResponse( new WaterResources($input), 'Sikeres felvétel');
 
     }
+    public function show($id){
+        $show = Water::find($id);
+
+        if(is_null($show)){
+            return $this->sendError( new WaterResources($show) , 'nem létezik ilyen');
+        }
+        return $this->sendResponse( new WaterResources($show) , 'sikeres lekérés');
+    }
+
+    public function update(Request $request, $id){
+
+        $input = $request->all();
+
+        $validation = Validator::make($input,[
+            "addWater" => "required"
+        ]);
+
+        if($validation->fails()){
+            return $this->sendError($validation, 'Hiba! Sikertelen szerkeztés');
+        }
+
+        $water = Water::find($id);
+        $water->update([
+            "addWater"=>$request->addWater
+        ]);
+
+        return $this->sendResponse( new WaterResources($water), 'Sikeres szerkeztés');
+    }
     public function destroy($id){
         $water = Water::find($id);
         $water->delete();

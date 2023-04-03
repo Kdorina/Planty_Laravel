@@ -22,7 +22,7 @@ class DiseaseController extends BaseController
         $id["type_id"]= Type::where('id', $input['type_id'])->first()->id;
         $validation = Validator::make($input ,[
             "name" => "required",
-            // "imgpath" => "required",
+            "imgpath" => "required",
             "type_id" => "required",
             "description" => "required",
             "solution" => "required"
@@ -50,8 +50,14 @@ class DiseaseController extends BaseController
     }
 
     public function show(Request $request, $id){
-
+        $show = Disease::find($id);
+        if(is_null($show)){
+            return $this->sendError( new DiseaseResources($show), "nem létezik ilyen");
+        }
+        return $this->sendResponse( new DiseaseResources($show), "sikeres lekérés");
     }
+
+
 
     public function update(Request $request, $id){
 

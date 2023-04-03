@@ -30,7 +30,6 @@ class MyPlantController extends BaseController
             $id = Auth::user()->getId();
         }
 
-        // $plantId = DB::table('plants')->select();
         $input = $request->all();
          $input['plant_id'] = Plant::where('id', $input['plant_id'])->first()->id;
 
@@ -47,6 +46,10 @@ class MyPlantController extends BaseController
             "plant_id"=>$request->plant_id
         ]);
         return $this->sendResponse( new MyPlantResource($plant), "Sikeres feltöltés");
+    }
+
+    public function show(){
+
     }
 
     public function destroy($id){
