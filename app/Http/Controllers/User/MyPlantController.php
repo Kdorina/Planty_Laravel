@@ -19,9 +19,16 @@ class MyPlantController extends BaseController
 
         if(Auth::check()){
             $user_id = Auth::user()->id;
-            $myplant = DB::table('myplants')->where(['user_id'=> $user_id])->get();
-        }
+            /* $myplant = DB::table('myplants')->where(['user_id'=> $user_id])->get(); */
+            /* return $this->sendResponse(new MyPlantResource($myplant), "Sikeres lekérés"); */
+
+       $plant= DB::select("SELECT plants.*, myplants.user_id from plants
+       inner join myplants on plants.id=myplants.plant_id
+       where myplants.user_id=$user_id");
+
     }
+    return $plant;
+}
 
     public function create(Request $request){
 
