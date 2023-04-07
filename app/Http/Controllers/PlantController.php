@@ -114,7 +114,7 @@ class PlantController extends BaseController
 
     // }
 
-    public function delete(Request $request , $id){
+    public function destroy(Request $request , $id){
         $plant = Plant::find($id);
         $plant->delete();
         return $this->sendResponse(new PlantResources($plant), "Sikeres törlés.");
