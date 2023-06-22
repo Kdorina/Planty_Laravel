@@ -82,22 +82,28 @@ class WaterController extends BaseController
 
 
     public function WateringReminder(){
-       /*  $water = DB::table('waters')->select('created_at')->get();
-        $reminder = $water->addDays(2);
-        if($reminder === $water){
-            return "nincs szüksége öntözésre";
-        } */
-        $reminder = Water::orderBy('created_at', 'desc')->first();
-        $water = $reminder->created_at;
+
+        $lastOne = Water::orderBy('created_at', 'desc')->first(); //-> az utolsó értéket adja vissza
+
+        $penultimate = DB::table('waters')->select('created_at')->offset(1)->limit(1)->get();  //-> az utolsó előtti értéket adja vissza
+
+        /* $water = $lastOne->created_at; */
+        $water = $penultimate[0]->created_at;
 
         $carbon = Carbon::parse($water);
         $carbon->addDays(2);
+        /* return $carbon; */
 
-        return $carbon;
 
-        /* $reminder->created_at = $carbon->toDateString();
-        $reminder->save(); */ // <- kicseréli az előzző dátumot 2 nappal és javitja az adatbázisban
+       /*  $lastOne->created_at = $carbon->toDateString();
+        $lastOne->save(); */ // <- kicseréli az előzző dátumot 2 nappal és javitja az adatbázisban
+       /*  return $lastOne; */
 
-        
+        if($carbon = $lastOne){
+            return "nem kell megöntöznöd csak 2 nap mulva";
+        }else{
+            return "Figyelem! 2 napja már nem öntözted meg a növényedet!" ;
+
+        }
     }
 }
