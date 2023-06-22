@@ -44,7 +44,7 @@ class PlantController extends BaseController
         }
             $name = $request->file("imgpath")->getClientOriginalName();
             // Storage::disk('local')->put($name, file_get_contents($request->file('imgpath')));
-            $path = $request->file('imgpath')->storeAs('public/images', $name);
+            $path = $request->file('imgpath')->storeAs('public', $name);
 
         $input = Plant::create([
             "name"=>$request->name,

@@ -63,7 +63,6 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
     Route::post("/logoutAdmin",[AdminController::class, "logout"]);
 
-    Route::get('/plants', [PlantController::class, "index"]);
     Route::post('/plant', [PlantController::class, "create"]);
     Route::get('/plant/{id}', [PlantController::class, "show"]);
     Route::put('/plantUpdate/{id}', [PlantController::class, "update"]);
@@ -82,5 +81,6 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
 
 });
-
+Route::get('/plants', [PlantController::class, "index"]);
 Route::get('/diseases', [DiseaseController::class, "index"]);
+Route::get('/reminder',[WaterController::class,'WateringReminder']);

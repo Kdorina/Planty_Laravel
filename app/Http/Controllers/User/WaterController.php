@@ -10,6 +10,7 @@ use App\Http\Resources\Water as WaterResources;
 use App\Http\Controllers\BaseController as BaseController;
 use Validator;
 use DB;
+use Carbon\Carbon;
 
 class WaterController extends BaseController
 {
@@ -77,5 +78,26 @@ class WaterController extends BaseController
         $water->delete();
         return $this->sendResponse(new WaterResources($water), "Sikeres törlés.");
 
+    }
+
+
+    public function WateringReminder(){
+       /*  $water = DB::table('waters')->select('created_at')->get();
+        $reminder = $water->addDays(2);
+        if($reminder === $water){
+            return "nincs szüksége öntözésre";
+        } */
+        $reminder = Water::orderBy('created_at', 'desc')->first();
+        $water = $reminder->created_at;
+
+        $carbon = Carbon::parse($water);
+        $carbon->addDays(2);
+
+        return $carbon;
+
+        /* $reminder->created_at = $carbon->toDateString();
+        $reminder->save(); */ // <- kicseréli az előzző dátumot 2 nappal és javitja az adatbázisban
+
+        
     }
 }
