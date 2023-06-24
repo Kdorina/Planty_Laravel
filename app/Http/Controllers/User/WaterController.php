@@ -100,7 +100,7 @@ class WaterController extends BaseController
        /*  return $lastOne; */
 
         if($carbon = $lastOne){
-            return "nem kell megöntöznöd csak 2 nap mulva";
+            return "Nem kell megöntöznöd, csak 2 nap múlva";
         }else{
             return "Figyelem! 2 napja már nem öntözted meg a növényedet!" ;
 
