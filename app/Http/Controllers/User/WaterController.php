@@ -83,27 +83,24 @@ class WaterController extends BaseController
 
     public function WateringReminder(){
 
-        $lastOne = Water::orderBy('created_at', 'desc')->first(); //-> az utolsó értéket adja vissza
+        $lastOne = Water::orderBy('created_at', 'desc')->first(); // Retrieves the latest record from the "waters" table
 
-        $penultimate = DB::table('waters')->select('created_at')->offset(1)->limit(1)->get();  //-> az utolsó előtti értéket adja vissza
+        $penultimate = Water::orderBy('created_at', 'desc')->skip(1)->take(1)->first(); // Retrieves the second-to-last record from the "waters" table
 
-        /* $water = $lastOne->created_at; */
-        $water = $penultimate[0]->created_at;
+        $currantDate = Carbon::now();
 
-        $carbon = Carbon::parse($water);
-        $carbon->addDays(2);
-        /* return $carbon; */
-
-
-       /*  $lastOne->created_at = $carbon->toDateString();
-        $lastOne->save(); */ // <- kicseréli az előzző dátumot 2 nappal és javitja az adatbázisban
-       /*  return $lastOne; */
-
-        if($carbon = $lastOne){
-            return "Nem kell megöntöznöd, csak 2 nap múlva";
-        }else{
-            return "Figyelem! 2 napja már nem öntözted meg a növényedet!" ;
-
+        if ($currantDate->toDateString() === $lastOne->created_at->toDateString()) {
+            $nextWateringSession = $currantDate->copy()->addDays(2) ;
+            $diffNumber = $currantDate->diffInDays($nextWateringSession);
+            return "Legközelebb $diffNumber nap múlva kell megöntöznöd";// Returns 'nem kell megöntözni' if the current date is equal to the last recorded date
         }
+        elseif($diffNumber < 1){
+            return "Ideje öntözni!";
+
+        } elseif ($currantDate->diffInDays($lastOne->created_at) > 2) {
+            $dateSinceLastWatering = $currantDate->diffInDays($lastOne->created_at);
+            return "Figyelem! $dateSinceLastWatering napja nem öntözted meg a növényedet!"; // Returns "Figyelem! 2 napja már nem öntözted meg a növényedet!" if the difference between the current date and the last recorded date is greater than 2 days
+        }
+
     }
 }
