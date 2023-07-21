@@ -92,14 +92,18 @@ class WaterController extends BaseController
         if ($currantDate->toDateString() === $lastOne->created_at->toDateString()) {
             $nextWateringSession = $currantDate->copy()->addDays(2) ;
             $diffNumber = $currantDate->diffInDays($nextWateringSession);
-            return "Legközelebb $diffNumber nap múlva kell megöntöznöd";// Returns 'nem kell megöntözni' if the current date is equal to the last recorded date
-        }
-        elseif($diffNumber < 1){
+            return  response()->json(['message'=>"Legközelebb $diffNumber nap múlva kell megöntöznöd"]);// Returns 'nem kell megöntözni' if the current date is equal to the last recorded date
+           
+
+        if($diffNumber < 1){
             return "Ideje öntözni!";
 
-        } elseif ($currantDate->diffInDays($lastOne->created_at) > 2) {
+            }
+        }
+       elseif($currantDate->diffInDays($lastOne->created_at) > 2) {
             $dateSinceLastWatering = $currantDate->diffInDays($lastOne->created_at);
-            return "Figyelem! $dateSinceLastWatering napja nem öntözted meg a növényedet!"; // Returns "Figyelem! 2 napja már nem öntözted meg a növényedet!" if the difference between the current date and the last recorded date is greater than 2 days
+            return  response()->json(['message'=>"Figyelem! $dateSinceLastWatering napja nem öntözted meg a növényedet!"]); // Returns "Figyelem! 2 napja már nem öntözted meg a növényedet!" if the difference between the current date and the last recorded date is greater than 2 days
+
         }
 
     }

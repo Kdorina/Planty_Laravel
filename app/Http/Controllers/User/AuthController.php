@@ -50,9 +50,8 @@ class AuthController extends BaseController
 
     }
 
-    public function logout(){
+    public function logout(Request $request){
         auth("sanctum")->user()->currentAccessToken()->delete();
         return response()->json("sikeres kijelentkezés");
-
     }
 }
