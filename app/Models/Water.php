@@ -18,6 +18,7 @@ class Water extends Model
     protected $fillable = [
         "id",
         "addWater",
+        "quantity",
         'user_id'
     ];
 }

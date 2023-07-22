@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('waters', function (Blueprint $table) {
             $table->id();
             $table->boolean("addwater");
+            $table->integer("quantity");
             $table->foreignId("user_id");
             $table->timestamps();
         });

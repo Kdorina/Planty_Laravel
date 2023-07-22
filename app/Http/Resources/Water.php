@@ -19,6 +19,7 @@ class Water extends JsonResource
         return [
             "id"=>$this->id,
             "addWater"=>$this->addWater,
+            "quantity"=>$this->quantity,
             "user_id"=>$this->user_id
 
         ];

@@ -30,7 +30,8 @@ class WaterController extends BaseController
         $input = $request->all();
 
         $validation = Validator::make($input,[
-            "addWater" => "required"
+            "addWater" => "required",
+            "quantity"  => "required"
         ]);
 
         if($validation->fails()){
@@ -39,6 +40,7 @@ class WaterController extends BaseController
 
         $input = Water::create([
             "addWater"=>$request->addWater,
+            "quantity"=>$request->quantity,
             "user_id"=>$id
         ]);
 
@@ -93,7 +95,7 @@ class WaterController extends BaseController
             $nextWateringSession = $currantDate->copy()->addDays(2) ;
             $diffNumber = $currantDate->diffInDays($nextWateringSession);
             return  response()->json(['message'=>"Legközelebb $diffNumber nap múlva kell megöntöznöd"]);// Returns 'nem kell megöntözni' if the current date is equal to the last recorded date
-           
+
 
         if($diffNumber < 1){
             return "Ideje öntözni!";
