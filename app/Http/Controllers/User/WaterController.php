@@ -98,15 +98,18 @@ class WaterController extends BaseController
 
 
         if($diffNumber < 1){
-            return "Ideje öntözni!";
+            return response()->json(['message'=>"Ideje öntözni"]);
 
             }
         }
-       elseif($currantDate->diffInDays($lastOne->created_at) > 2) {
+       elseif($currantDate->diffInDays($lastOne->created_at) >= 2) {
             $dateSinceLastWatering = $currantDate->diffInDays($lastOne->created_at);
             return  response()->json(['message'=>"Figyelem! $dateSinceLastWatering napja nem öntözted meg a növényedet!"]); // Returns "Figyelem! 2 napja már nem öntözted meg a növényedet!" if the difference between the current date and the last recorded date is greater than 2 days
 
         }
 
+        else{
+            return response()->json(['message'=>"1 nap múlva öntözés"]);
+        }
     }
 }
